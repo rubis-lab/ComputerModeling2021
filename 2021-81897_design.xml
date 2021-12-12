@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><hyundaiDesignTool>
+    <ETHs>
+        <ETH IP="192.168.0.100">
+            <link rid="ECU0" type="ECU"/>
+            <link rid="CAR" type="CAR"/>
+        </ETH>
+    </ETHs>
+    <CAR IP="CAR">
+        <link rid="192.168.0.100" type="ETH"/>
+    </CAR>
+    <SWCs>
+        <SWC BCET="20" IP="LK" Virtual="1" WCET="20" consumer="" deadline="200" period="200" phase="0" readCon="1" writeCon="1">
+            <impl path="/home/amrit/ComputerModeling2021/sharedObjectFiles/LK/LK.cpp" type="MANUAL"/>
+            <link idxCore="0" rid="ECU0" type="ECU"/>
+        </SWC>
+        <SWC BCET="20" IP="CC" Virtual="1" WCET="20" consumer="" deadline="200" period="200" phase="0" readCon="1" writeCon="1">
+            <impl path="/home/amrit/ComputerModeling2021/sharedObjectFiles/CC/CC.cpp" type="MANUAL"/>
+            <link idxCore="0" rid="ECU0" type="ECU"/>
+        </SWC>
+        <SWC BCET="40" IP="Sensing" Virtual="1" WCET="40" consumer="" deadline="200" period="200" phase="0" readCon="0" writeCon="0">
+            <impl path="/home/amrit/ComputerModeling2021/sharedObjectFiles/SENSING/SENSING.cpp" type="MANUAL"/>
+            <link idxCore="0" rid="ECU0" type="ECU"/>
+        </SWC>
+        <SWC BCET="40" IP="Brake" Virtual="1" WCET="40" consumer="" deadline="200" period="200" phase="0" readCon="0" writeCon="0">
+            <impl path="/home/amrit/ComputerModeling2021/sharedObjectFiles/BRAKE/BRAKE.cpp" type="MANUAL"/>
+            <link idxCore="0" rid="ECU0" type="ECU"/>
+        </SWC>
+        <SWC BCET="40" IP="Power" Virtual="1" WCET="40" consumer="" deadline="200" period="200" phase="0" readCon="0" writeCon="0">
+            <impl path="/home/amrit/ComputerModeling2021/sharedObjectFiles/POWER/POWER.cpp" type="MANUAL"/>
+            <link idxCore="0" rid="ECU0" type="ECU"/>
+        </SWC>
+        <SWC BCET="40" IP="Local" Virtual="1" WCET="40" consumer="" deadline="200" period="200" phase="0" readCon="0" writeCon="0">
+            <impl path="/home/amrit/ComputerModeling2021/sharedObjectFiles/LOCAL/LOCAL.cpp" type="MANUAL"/>
+            <link idxCore="0" rid="ECU0" type="ECU"/>
+        </SWC>
+    </SWCs>
+    <ECUs>
+        <ECU IP="ECU0" Virtual="1" numCores="1" schedPolicy="RM" sysClock="100" targetArch="SPC56EL70">
+            <link idxCore="0" rid="CC" type="SWC"/>
+            <link idxCore="0" rid="LK" type="SWC"/>
+            <link idxCore="0" rid="Local" type="SWC"/>
+            <link idxCore="0" rid="Sensing" type="SWC"/>
+            <link idxCore="0" rid="Brake" type="SWC"/>
+            <link idxCore="0" rid="Power" type="SWC"/>
+            <link rid="192.168.0.100" type="ETH"/>
+        </ECU>
+    </ECUs>
+</hyundaiDesignTool>
