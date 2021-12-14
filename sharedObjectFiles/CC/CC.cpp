@@ -22,16 +22,27 @@ void sim_main()
   /********************************************/
   write5 = 0;
   write6 = 0;
-  read2 = read2 / 100 - 400000;
+  //read2 = read2 / 100 - 400000;
+  read2 = read2 / 100 - 50000; // speed up to 70kmh
 
   if(read4 > 6000) {
     
     write6 = read1;
+    /*if(write6 < read1) {
+      write6 += 100;
+    }*/
 	
-	  if (read3 - read2 < 0)
-	    write6 = read2;
-    else if(read3 > read2)
+	  if (read3 - read2 < 0) {
+      write5 = 0;
+      write6 = read2;
+    }
+	    
+    else if(read3 > read2) {
       write6 = 0;
+      if(write5 < 1000) { // smooth brake
+        write5 += 100;
+      }
+    }
   }
   
   /********************************************/

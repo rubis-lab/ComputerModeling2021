@@ -5,7 +5,6 @@
 #include <climits>
 #include <cmath>
 
-
 /** 
  *  This file is the cpp file for the Job class.
  *  @file Job.cpp
@@ -567,7 +566,7 @@ void Job::add_history(std::shared_ptr<Job> new_deadline)
     m_history_of_sim_deadline.push_back(new_deadline);
 }
 
-void Job::run_function()
+void Job::run_function() //TODO log here, read and write in all combinations, read before run, write after run
 {
     m_run_start = std::chrono::steady_clock::now();
     if((get_is_read() == true) && (get_is_write() == true))
@@ -575,22 +574,179 @@ void Job::run_function()
         if(!global_object::tagged_data_read.empty())
         {
             std::shared_ptr<TaggedData> current_data = global_object::tagged_data_read.at(global_object::tagged_data_read.size()-1);
+
+            // log reading data if it is the task we want to log
+            if(get_task_name().compare(utils::log_task) == 0) {
+                // log read1
+                global_object::logger->_202182520_task_read_write_logger(
+                    get_task_name(), 
+                    std::to_string(current_data->data_time), 
+                    "READ", 
+                    std::to_string((std::to_string(current_data->data_read1)).length()), 
+                    std::to_string(current_data->data_read1)
+                );
+
+                // log read2
+                global_object::logger->_202182520_task_read_write_logger(
+                    get_task_name(), 
+                    std::to_string(current_data->data_time), 
+                    "READ", 
+                    std::to_string((std::to_string(current_data->data_read2)).length()), 
+                    std::to_string(current_data->data_read2)
+                );
+
+                // log read3
+                global_object::logger->_202182520_task_read_write_logger(
+                    get_task_name(), 
+                    std::to_string(current_data->data_time), 
+                    "READ", 
+                    std::to_string((std::to_string(current_data->data_read3)).length()), 
+                    std::to_string(current_data->data_read3)
+                );
+
+                // log read4
+                global_object::logger->_202182520_task_read_write_logger(
+                    get_task_name(), 
+                    std::to_string(current_data->data_time), 
+                    "READ", 
+                    std::to_string((std::to_string(current_data->data_read4)).length()), 
+                    std::to_string(current_data->data_read4)
+                );
+
+                // log read5
+                global_object::logger->_202182520_task_read_write_logger(
+                    get_task_name(), 
+                    std::to_string(current_data->data_time), 
+                    "READ", 
+                    std::to_string((std::to_string(current_data->data_read5)).length()), 
+                    std::to_string(current_data->data_read5)
+                );
+
+                // log read6
+                global_object::logger->_202182520_task_read_write_logger(
+                    get_task_name(), 
+                    std::to_string(current_data->data_time), 
+                    "READ", 
+                    std::to_string((std::to_string(current_data->data_read6)).length()), 
+                    std::to_string(current_data->data_read6)
+                );
+            }
+
             global_object::tagged_data_read.clear();
         }
+
         run();
   
         std::shared_ptr<DelayedData> delayed_data = std::make_shared<DelayedData>();
+
         delayed_data->data_time = m_actual_finish_time;
         delayed_data->data_write4 = shared::rtY.write4;
         delayed_data->data_write3 = shared::rtY.write3;
         delayed_data->data_write2 = shared::CC_Send_BRAKE;
         delayed_data->data_write1 = shared::CC_Send_ACCEL;
+
+        // log writing data if it is the task we want to log
+        if(get_task_name().compare(utils::log_task) == 0) {
+            // log write1
+            global_object::logger->_202182520_task_read_write_logger(
+                get_task_name(), 
+                std::to_string(delayed_data->data_time), 
+                "WRITE", 
+                std::to_string((std::to_string(delayed_data->data_write1)).length()), 
+                std::to_string(delayed_data->data_write1)
+            );
+
+            // log write2
+            global_object::logger->_202182520_task_read_write_logger(
+                get_task_name(), 
+                std::to_string(delayed_data->data_time), 
+                "WRITE", 
+                std::to_string((std::to_string(delayed_data->data_write2)).length()), 
+                std::to_string(delayed_data->data_write2)
+            );
+
+            // log write3
+            global_object::logger->_202182520_task_read_write_logger(
+                get_task_name(), 
+                std::to_string(delayed_data->data_time), 
+                "WRITE", 
+                std::to_string((std::to_string(delayed_data->data_write3)).length()), 
+                std::to_string(delayed_data->data_write3)
+            );
+
+            // log write4
+            global_object::logger->_202182520_task_read_write_logger(
+                get_task_name(), 
+                std::to_string(delayed_data->data_time), 
+                "WRITE", 
+                std::to_string((std::to_string(delayed_data->data_write4)).length()), 
+                std::to_string(delayed_data->data_write4)
+            );
+        }
     }
     else if((get_is_read() == true) && (get_is_write() == false))
     {
         if(!global_object::tagged_data_read.empty())
         {
             std::shared_ptr<TaggedData> current_data = global_object::tagged_data_read.at(global_object::tagged_data_read.size()-1);
+
+            // log reading data if it is the task we want to log
+            if(get_task_name().compare(utils::log_task) == 0) {
+                // log read1
+                global_object::logger->_202182520_task_read_write_logger(
+                    get_task_name(), 
+                    std::to_string(current_data->data_time), 
+                    "READ", 
+                    std::to_string((std::to_string(current_data->data_read1)).length()), 
+                    std::to_string(current_data->data_read1)
+                );
+
+                // log read2
+                global_object::logger->_202182520_task_read_write_logger(
+                    get_task_name(), 
+                    std::to_string(current_data->data_time), 
+                    "READ", 
+                    std::to_string((std::to_string(current_data->data_read2)).length()), 
+                    std::to_string(current_data->data_read2)
+                );
+
+                // log read3
+                global_object::logger->_202182520_task_read_write_logger(
+                    get_task_name(), 
+                    std::to_string(current_data->data_time), 
+                    "READ", 
+                    std::to_string((std::to_string(current_data->data_read3)).length()), 
+                    std::to_string(current_data->data_read3)
+                );
+
+                // log read4
+                global_object::logger->_202182520_task_read_write_logger(
+                    get_task_name(), 
+                    std::to_string(current_data->data_time), 
+                    "READ", 
+                    std::to_string((std::to_string(current_data->data_read4)).length()), 
+                    std::to_string(current_data->data_read4)
+                );
+
+                // log read5
+                global_object::logger->_202182520_task_read_write_logger(
+                    get_task_name(), 
+                    std::to_string(current_data->data_time), 
+                    "READ", 
+                    std::to_string((std::to_string(current_data->data_read5)).length()), 
+                    std::to_string(current_data->data_read5)
+                );
+
+                // log read6
+                global_object::logger->_202182520_task_read_write_logger(
+                    get_task_name(), 
+                    std::to_string(current_data->data_time), 
+                    "READ", 
+                    std::to_string((std::to_string(current_data->data_read6)).length()), 
+                    std::to_string(current_data->data_read6)
+                );
+            }
+
             global_object::tagged_data_read.clear();
         }
         run();
@@ -611,6 +767,46 @@ void Job::run_function()
         delayed_data->data_write3 = shared::rtY.write3;
         delayed_data->data_write2 = shared::CC_Send_BRAKE;
         delayed_data->data_write1 = shared::CC_Send_ACCEL;
+
+        // log writing data if it is the task we want to log
+        if(get_task_name().compare(utils::log_task) == 0) {
+            // log write1
+            global_object::logger->_202182520_task_read_write_logger(
+                get_task_name(), 
+                std::to_string(delayed_data->data_time), 
+                "WRITE", 
+                std::to_string((std::to_string(delayed_data->data_write1)).length()), 
+                std::to_string(delayed_data->data_write1)
+            );
+
+            // log write2
+            global_object::logger->_202182520_task_read_write_logger(
+                get_task_name(), 
+                std::to_string(delayed_data->data_time), 
+                "WRITE", 
+                std::to_string((std::to_string(delayed_data->data_write2)).length()), 
+                std::to_string(delayed_data->data_write2)
+            );
+
+            // log write3
+            global_object::logger->_202182520_task_read_write_logger(
+                get_task_name(), 
+                std::to_string(delayed_data->data_time), 
+                "WRITE", 
+                std::to_string((std::to_string(delayed_data->data_write3)).length()), 
+                std::to_string(delayed_data->data_write3)
+            );
+
+            // log write4
+            global_object::logger->_202182520_task_read_write_logger(
+                get_task_name(), 
+                std::to_string(delayed_data->data_time), 
+                "WRITE", 
+                std::to_string((std::to_string(delayed_data->data_write4)).length()), 
+                std::to_string(delayed_data->data_write4)
+            );
+        }
+        
         #endif
     }
     m_run_end = std::chrono::steady_clock::now();

@@ -33,7 +33,16 @@
  */
 Logger::Logger()
 {
-    
+    rw_log.open(utils::cpsim_path + "/Log/202182520_read_write.log", std::ios::out);
+    std::string rwcontents = "[ TASK NAME ] [ TIME ] [ READ/WRITE ] [ DATA LENGTH ] [ RAW DATA ]\n";
+    rw_log.write(rwcontents.c_str(), rwcontents.size());
+    rw_log.close();
+
+
+    event_log.open(utils::cpsim_path + "/Log/202182520_event.log", std::ios::out);
+    std::string evcontents = "[ TIME ] [ JOB ID ] [ EVENT TYPE ]\n";
+    event_log.write(evcontents.c_str(), evcontents.size());
+    event_log.close();
 }
 
 /**
@@ -51,7 +60,7 @@ Logger::Logger()
  */
 Logger::~Logger()
 {
-
+ 
 }
 
 /**
@@ -113,4 +122,22 @@ void Logger::start_logging()
         scheduling_log.close();
         utils::mtx_data_log.unlock();    
     }    
+}
+
+void Logger::_202182520_task_read_write_logger(std::string task_name, std::string time, std::string rw, std::string data_length, std::string raw_data) {
+    rw_log.open(utils::cpsim_path + "/Log/202182520_read_write.log", std::ios::app);
+
+    std::string contents = task_name + " / " + time + " / " + rw + " / " + data_length + " / " + raw_data + "\n";
+
+    rw_log.write(contents.c_str(), contents.size());
+    rw_log.close();
+}
+
+void Logger::_202182520_real_cyber_event_logger(double time, int job_id, std::string event_type) {
+    event_log.open(utils::cpsim_path + "/Log/202182520_event.log", std::ios::app);
+
+    std::string contents = std::to_string((int)time) + " / J" + std::to_string(job_id) + " / " + event_type + "\n";
+
+    event_log.write(contents.c_str(), contents.size());
+    event_log.close();
 }
